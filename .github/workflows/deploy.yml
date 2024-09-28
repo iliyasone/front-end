@@ -93,5 +93,5 @@ jobs:
           ssh -o StrictHostKeyChecking=no ${{ secrets.VDS_USER }}@${{ secrets.VDS_HOST }} "
             cd ${{ secrets.VDS_DEPLOY_PATH }} &&
             npm install --production &&
-            pm2 restart app || pm2 start npm --name app -- dev
+            pm2 restart app || pm2 start npm --name app -- dev -- --port 3000
           "
