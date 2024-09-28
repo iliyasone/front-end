@@ -14,7 +14,7 @@ export default function Posts() {
       <Carousel>
         <CarouselContent>
           <CarouselItem>
-            <h1 className="block text-3xl font-black font-montserrat mb-2">
+            <h1 className="block text-6xl font-black font-montserrat mb-2 flex flex-col items-center justify-center text-center">
               Meet the Author
             </h1>
             <div className="flex justify-center items-center">
@@ -34,7 +34,7 @@ export default function Posts() {
           </CarouselItem>
 
           <CarouselItem>
-            <h1 className="block text-3xl font-black font-montserrat mb-2">
+            <h1 className="block text-6xl font-black font-montserrat mb-2 flex flex-col items-center justify-center text-center">
               Backend
             </h1>
             <p className="block text-3xl font-black font-light mb-2 ">
@@ -49,7 +49,7 @@ export default function Posts() {
           </CarouselItem>
 
           <CarouselItem>
-            <h1 className="block text-3xl font-black font-montserrat mb-2">
+            <h1 className="block text-6xl font-black font-montserrat mb-2 flex flex-col items-center justify-center text-center">
               Frontend Interface
             </h1>
             <p className="block text-3xl font-black font-light mb-2 ">

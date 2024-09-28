@@ -123,16 +123,14 @@ const PostsPage = () => {
 
   return (
     <div className="p-4 max-w-full mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-center">Posts</h1>
-
-      <h1 className="block text-4xl font-black font-montserrat mb-2 flex flex-col">
-        Share your ideas
+      <h1 className="block text-6xl font-black font-montserrat mb-2 flex flex-col items-center justify-center text-center">
+        Share your ideas.
       </h1>
       <form
         onSubmit={handleSubmit}
         className="mb-6 border p-6 rounded-lg shadow-lg"
       >
-        <div className="mb-4">
+        <div className="flex justify-center items-center mb-4">
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Input
               type="text"
@@ -142,7 +140,7 @@ const PostsPage = () => {
               onFocus={() => handleFocus("label")}
               placeholder="Label"
               required
-              className="w-full p-2 border rounded-lg"
+              className="w-full p-2 border rounded-lg "
             />
           </div>
         </div>
