@@ -62,25 +62,20 @@ jobs:
         with:
           node-version: "18"
 
-      # Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Build project (optional step for production, you can remove if not needed)
       - name: Build project
         run: npm run build
 
-      # Debugging step to ensure .next exists (remove if not building)
       - name: List .next folder contents (optional)
         run: ls -la .next
 
-      # Setup SSH to deploy to VDS
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.VDS_PRIVATE_KEY }}
 
-      # Copy files to the server
       - name: Deploy to VDS
         run: |
           # Create the deploy directory on the VDS server
@@ -89,9 +84,16 @@ jobs:
           # Use rsync to transfer files, excluding large/unnecessary directories
           rsync -avz --exclude='node_modules' --exclude='.git' --exclude='.next' . ${{ secrets.VDS_USER }}@${{ secrets.VDS_HOST }}:${{ secrets.VDS_DEPLOY_PATH }}/
 
-          # SSH into the server to run npm install and pm2 start/restart
+          # SSH into the server to clean up PM2 processes, run npm install, and start the app
           ssh -o StrictHostKeyChecking=no ${{ secrets.VDS_USER }}@${{ secrets.VDS_HOST }} "
             cd ${{ secrets.VDS_DEPLOY_PATH }} &&
+            # Stop and delete all PM2 processes
+            pm2 stop all || true &&
+            pm2 delete all || true &&
+
+            # Install production dependencies
             npm install --production &&
-            pm2 restart app || pm2 start npm --name app -- dev -- --port 3000
+
+            # Start the app using PM2 on port 3000
+            pm2 start npm --name app -- run dev -- --port 3000
           "
