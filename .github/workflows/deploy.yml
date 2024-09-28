@@ -85,10 +85,10 @@ jobs:
         run: |
           # Create the deploy directory on the VDS server
           ssh -o StrictHostKeyChecking=no ${{ secrets.VDS_USER }}@${{ secrets.VDS_HOST }} "mkdir -p ${{ secrets.VDS_DEPLOY_PATH }}"
-          
+
           # Use rsync to transfer files, excluding large/unnecessary directories
           rsync -avz --exclude='node_modules' --exclude='.git' --exclude='.next' . ${{ secrets.VDS_USER }}@${{ secrets.VDS_HOST }}:${{ secrets.VDS_DEPLOY_PATH }}/
-          
+
           # SSH into the server to run npm install and pm2 start/restart
           ssh -o StrictHostKeyChecking=no ${{ secrets.VDS_USER }}@${{ secrets.VDS_HOST }} "
             cd ${{ secrets.VDS_DEPLOY_PATH }} &&
