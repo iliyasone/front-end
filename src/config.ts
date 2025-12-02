@@ -1,1 +1,1 @@
-export const API_URL = "http://v7065.hosted-by-vdsina.com:8000";
+export const API_URL = process.env.NEXT_PUBLIC_API_URL!;
